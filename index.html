@@ -18,7 +18,7 @@
         <div class="address__add">
             282/A, 69th Cross Road Banashankari, 2nd <br>
             Stage, Kumaraswamy Layout, Bengaluru, <br>
-            Karnataka 560078 Ph:+91-+91 97389 76108                
+            Karnataka 560078 Ph:+91 97389 76108                
         </div>
         <div class="address__site"> 
             <img src="https://cdn-icons-png.flaticon.com/512/364/364089.png" class="address__site_img" alt="site">
@@ -50,11 +50,21 @@
           </tr>
     
           <tr class="services__td">
-            <td><input type="text"></td>
+            <td>
+              <select name="services" id="services">
+                <option value="-">-</option>
+                <option value="Personal Supportive Care">Personal Supportive Care</option>
+                <option value="Physiotherapy at Home">Physiotherapy at Home</option>
+                <option value="Home Hospitalisation">Home Hospitalisation</option>
+                <option value="Nursing Care at Home">Nursing Care at Home</option>
+                <option value="Doctor Consultation">Doctor Consultation</option>
+                <option value="New Born Baby & Pre- Delivery">New Born Baby & Pre- Delivery</option>
+              </select>
+            </td>
             <td><input type="text" id="charge" value="0" ></td>
             <td><input type="text" id="days" value="0" ></td>
             <td><input type="text" id="amount" readonly></td>
-            <td><input type="text" id="regfee" value="0" ></td>
+            <td><input type="text" id="regfee" value="3000" ></td>
           </tr>
       </tbody>
     </table>
@@ -73,11 +83,11 @@
         
             <tr class="items__td">
                 <td><button type="button" onclick="addnew(event)">+</button></td>
-                <td><input type="text" value="-"></td>
-                <td><input type="text" value="-"></td>
-                <td><input type="text" value="-"></td>
-                <td><input type="text" value="-"></td>
-                <td><input type="text" value="-"></td>
+                <td><input type="text" placeholder="-"></td>
+                <td><input type="text" placeholder="-"></td>
+                <td><input type="text" placeholder="-"></td>
+                <td><input type="text" placeholder="-"></td>
+                <td><input type="text" placeholder="-"></td>
                 <td><button type="button" onclick="del(event)">-</button></td>
             </tr>  
         </tbody>
@@ -162,14 +172,17 @@
             var countAm = 0;
             for (let i=0; i < tds.length; i++) {
 
-                if(tds[i].cells[2].childNodes[0].value != '-' & tds[i].cells[3].childNodes[0].value != '-') {
+                if(tds[i].cells[2].childNodes[0].value != '' & tds[i].cells[3].childNodes[0].value != '') {
                     let calAm = tds[i].cells[2].childNodes[0].value * tds[i].cells[3].childNodes[0].value;
                     tds[i].cells[5].childNodes[0].value = calAm;
                     countAm += calAm;
+                }else{
+                    tds[i].cells[5].childNodes[0].value = 0;
                 }
             }
 
             document.getElementById("total").innerText = (charge * days) + Number(regfee) + countAm;
+            
         }
         
         setInterval(() => {
