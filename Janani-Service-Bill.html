@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Janani Service Bill</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+        <img src="https://jananihomenursingservice.com/wp-content/uploads/2021/02/Janani1_final.png" class="logo__img" alt="logo">
+        <div class="logo__tag">COMPLETE MEDICAL CARE AT HOME</div>
+    </div>  
+
+    <div class="address">
+        <div class="address__add">
+            282/A, 69th Cross Road Banashankari, 2nd <br>
+            Stage, Kumaraswamy Layout, Bengaluru, <br>
+            Karnataka 560078 Ph:+91-+91 97389 76108                
+        </div>
+        <div class="address__site"> 
+            <img src="https://cdn-icons-png.flaticon.com/512/364/364089.png" class="address__site_img" alt="site">
+            <p class="address__site_p">www.Jananihomenursingservice.com</p>
+        </div>    
+    </div>  
+  </header>
+
+  <hr class="hr">
+
+  <main>
+    <div class="info">
+      <div class="info__to"> <label for="to">To:&nbsp;</label> <textarea name="to" class="to" id="to" cols="30" rows="4"></textarea></div>
+
+      <div class="detail">
+        <div class="detail__invoice"><label for="invoice">INVOICE:</label> <input type="text" value="#101020" id="invoice"> </div>
+        <div class="detail__date"><label for="date">Date:</label> <input type="date" id="date"></div>
+      </div>
+    </div>
+
+    <table>
+      <tbody class="services">
+        <tr class="services__th">
+            <th>Types of Services</th>
+            <th>Charges</th>
+            <th>No. of Days</th>
+            <th>Amount</th>
+            <th>Reg. Fee</th>
+          </tr>
+    
+          <tr class="services__td">
+            <td><input type="text"></td>
+            <td><input type="text" id="charge" value="1000" ></td>
+            <td><input type="text" id="days" value="30" ></td>
+            <td><input type="text" id="amount" readonly></td>
+            <td><input type="text" id="regfee" value="3000" ></td>
+          </tr>
+      </tbody>
+    </table>
+
+    <table>
+        <tbody class="items">
+            <tr class="items__th">
+                <th>Add</th>
+                <th>REQUIREMENTS (ITEMS)</th>
+                <th>RENT</th>
+                <th>No. of Days</th>
+                <th>DEPOSITE</th>
+                <th>SALE/AMOUNT</th>
+                <th>Delete</th>
+            </tr>
+        
+            <tr class="items__td">
+                <td><button type="button" onclick="addnew(event)">+</button></td>
+                <td><input type="text" value="-"></td>
+                <td><input type="text" value="-"></td>
+                <td><input type="text" value="-"></td>
+                <td><input type="text" value="-"></td>
+                <td><input type="text" value="-"></td>
+                <td><button type="button" onclick="del(event)">-</button></td>
+            </tr>  
+        </tbody>
+    </table>
+
+    <div class="total">
+        <p class="total__amount">TOTAL : Rs <span id="total">0</span></p>
+    </div>
+
+    <div class="sign">
+    <div class="sign__cl">
+      <div>________________</div>
+      <div>Client Signature</div>
+    </div>
+
+    <div class="sign__tofrom">
+        <p>&nbsp; This Service is Valid from &nbsp;</p>
+        <p> <textarea name="vf" id="vf" class="vf" cols="10" rows="1">date</textarea> &nbsp;</p>
+        <p> to &nbsp;</p>
+        <p> <textarea name="vto" id="vto" class="vto" cols="10" rows="1">date</textarea> </p>
+    </div>
+    
+    <div class="sign__mng">
+      <div>&nbsp; ________________</div>
+      <div>&nbsp; Staff Manager Signature</div>
+    </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer__site">
+        <div class="address__site"> 
+            <img src="https://cdn-icons-png.flaticon.com/512/364/364089.png" class="address__site_img" alt="site">
+            <p class="footer__p">www.Jananihomenursingservice.com</p>
+        </div>  
+      </div>
+      <div class="footer__num">
+        <p class="footer__p">call-us: +91 97389 76108</p>
+      </div>
+    </div>
+
+    <div class="btn-con">
+      <button type="button" class="print" onclick="makeP(event)">Print</button>
+    </div>
+  </main>
+
+
+  <script>
+    function insertAfter(newNode, existingNode) {
+            existingNode.insertBefore(newNode, existingNode);
+        }
+
+
+        function addnew(event) {
+            // console.log(event.target.parentNode.parentNode);
+            let existingNode = event.target.parentNode.parentNode;
+            let newNode = document.createElement("TR");
+            newNode.classList.add("items__td");
+            newNode.innerHTML = `<td><button type="button" onclick="addnew(event)">+</button></td>
+                <td><input type="text" value="-"></td>
+                <td><input type="text" value="-"></td>
+                <td><input type="text" value="-"></td>
+                <td><input type="text" value="-"></td>
+                <td><input type="text" value="-"></td>
+                <td><button type="button" onclick="del(event)">-</button></td>`;
+            existingNode.after(newNode);
+        }
+
+        function del(event) {
+            // console.log(event.target.parentNode.parentNode);
+            event.target.parentNode.parentNode.remove();
+        }
+
+        function calVal() {
+            let charge = document.getElementById("charge").value;
+            let days = document.getElementById("days").value;
+            let amount = document.getElementById("amount");
+            let regfee = document.getElementById("regfee").value;
+            let tds = document.getElementsByClassName("items__td");
+
+            amount.value = (charge * days);
+        
+            var countAm = 0;
+            for (let i=0; i < tds.length; i++) {
+
+                if(tds[i].cells[2].childNodes[0].value != '-' & tds[i].cells[3].childNodes[0].value != '-') {
+                    let calAm = tds[i].cells[2].childNodes[0].value * tds[i].cells[3].childNodes[0].value;
+                    tds[i].cells[5].childNodes[0].value = calAm;
+                    countAm += calAm;
+                }
+            }
+
+            document.getElementById("total").innerText = (charge * days) + Number(regfee) + countAm;
+        }
+        
+        setInterval(() => {
+            calVal();
+        }, 1000);
+
+        function makeP() {
+            document.getElementsByClassName("print")[0].hidden = true;
+            let tds = document.getElementsByClassName("items__td");
+            let ths = document.getElementsByClassName("items__th");
+            ths[0].cells[0].hidden = true;
+            ths[0].cells[6].hidden = true;
+        
+            for (let i=0; i < tds.length; i++) {
+                    tds[i].cells[0].hidden = true;
+                    tds[i].cells[6].hidden = true;
+                }
+
+                window.print();
+
+                    for (let i=0; i < tds.length; i++) {
+                        tds[i].cells[0].hidden = false;
+                        tds[i].cells[6].hidden = false;
+                    }
+        
+                    ths[0].cells[0].hidden = false;
+                    ths[0].cells[6].hidden = false;  
+                    document.getElementsByClassName("print")[0].hidden = false;
+            }
+  </script>
+</body>
+</html>
