@@ -148,11 +148,11 @@
             let newNode = document.createElement("TR");
             newNode.classList.add("items__td");
             newNode.innerHTML = `<td><button type="button" onclick="addnew(event)">+</button></td>
-                <td><input type="text" value="-"></td>
-                <td><input type="text" value="-"></td>
-                <td><input type="text" value="-"></td>
-                <td><input type="text" value="-"></td>
-                <td><input type="text" value="-"></td>
+                <td><input type="text" placeholder="-"></td>
+                <td><input type="text" placeholder="-"></td>
+                <td><input type="text" placeholder="-"></td>
+                <td><input type="text" placeholder="-"></td>
+                <td><input type="text" placeholder="-"></td>
                 <td><button type="button" onclick="del(event)">-</button></td>`;
             existingNode.after(newNode);
         }
